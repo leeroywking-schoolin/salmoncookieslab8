@@ -1,0 +1,72 @@
+
+table{
+  width: 95%;
+  padding: 5px;
+}
+th {
+  background: #999;
+  padding: 10px;
+  margin: 10px
+}
+
+td {
+  padding: 5px;
+  margin: 5px;
+  border: 5px black;
+}
+tr#rowtotals{
+    background:orange;
+}
+tr#rowtotalsstaff{
+  background: orange;
+}
+td:last-child{
+    background: red;
+}
+
+#rowtotals td:last-child{
+    background: purple;
+}
+#rowtotalsstaff td:last-child{
+  background: purple;
+}
+
+body{
+  font-family: 'ZCOOL QingKe HuangYou', cursive;
+}
+
+body article1{
+  height: 100%;
+  display: block;
+  margin: auto;
+  width: 90%;
+  border: 3px transparent green;
+  padding: 20px;
+  background-color:rgb(250, 128, 114);
+}
+body article2{
+  height: 100%;
+  display: block;
+  margin: auto;
+  width: 90%;
+  border: 3px transparent green;
+  padding: 20px;
+  background-color:rgb(202, 101, 90);
+}
+body article3{  
+  height: 100%;
+  display: block;
+  margin: auto;
+  width: 90%;
+  border: 3px transparent green;
+  padding: 20px;
+  background-color:rgb(241, 87, 70);
+}
+body img{
+  width: 100%;
+}
+
+body{
+  background-color:rgb(247, 181, 174);
+  z-index: -1;
+}

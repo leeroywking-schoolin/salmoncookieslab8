@@ -12,7 +12,7 @@
     <a href="index.html">Back to the homepage</a>
   <h1>Salmon cookie sales by location</h1>
 
-  <table>
+  <table id="tablemain">
     <tr id="tablehead"></tr>
     <tr id="1andpike"></tr>
     <tr id="seatac"></tr>
@@ -21,17 +21,35 @@
     <tr id="alkibeach"></tr>
     <tr id="rowtotals"></tr>
   </table>
-  <h1>Staffing requirement, Number of necessary Employees</h1>
-  <table>
-    <tr id="tableheadstaff"></tr>
-    <tr id="1andpikestaff"></tr>
-    <tr id="seatacstaff"></tr>
-    <tr id="seacenterstaff"></tr>
-    <tr id="caphillstaff"></tr>
-    <tr id="alkibeachstaff"></tr>
-    <tr id="rowtotalsstaff"></tr>
-  </table>
+
+
+  <form id="chat-form">
+    <fieldset>
+      <legend>New Store adder</legend>
+      
+      <label for="max">Max?</label>
+      <input name="max" type="text" />
+
+      <label for="min">Min?</label>
+      <input name="min" type="text" />
+
+      <label for="avg">Avg?</label>
+      <input name="avg" type="text" />
+
+      <label for="elementId">ElementId?</label>
+      <input name="elementId" type="text" />
+
+      <label for="name">Name?</label>
+      <input name="name" type="text" />
+
+      <button type="submit">Create New Comment!</button>
+    </fieldset>
+  </form>
+<ul id="chat-list"></ul>
+
   <script src="js/app.js"></script>
 </body>
 
 </html>
+
+<!-- var firstAPObject = new LocationConstructor(65,23,6.3,firstAndPike,'First and Pike'); -->

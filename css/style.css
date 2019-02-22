@@ -71,9 +71,15 @@ body{
   z-index: -1;
 }
 label{
-  float: right;
+  float: left;
 }
 
 #newstore-form{
   width:150px;
+}
+form {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+label{
+  padding: 2px;
 }

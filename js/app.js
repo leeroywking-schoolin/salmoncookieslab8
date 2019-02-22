@@ -28,7 +28,7 @@ function LocationConstructor(max, min, cookiepersale, rowTitle) {
   this.rowTitle = rowTitle;
   this.cookiesByHour = [];
 }
-LocationConstructor.prototype.randRange = function() {
+LocationConstructor.prototype.randRange = function () {
   return Math.floor((Math.random() * (this.maxCustPerHour - this.minCustPerHour)) + this.minCustPerHour)
 };
 LocationConstructor.prototype.render = function () {
@@ -82,20 +82,20 @@ function tableFootRender(footElement) {
   label.innerHTML = ('By Hour Totals');
   footElement.appendChild(label);
   // debugger;
-  for (var i=0;i<hours.length;i++) {
+  for (var i = 0; i < hours.length; i++) {
     var entry = document.createElement('td');
-      var sum = 0;
-      for(var j =0 ; j < objList.length; j++ ){
-        sum = sum + objList[j].cookiesByHour[i];
-      };
-      grandTotal = grandTotal + sum;
-      entry.textContent = (sum);
-      footElement.appendChild(entry)
+    var sum = 0;
+    for (var j = 0; j < objList.length; j++) {
+      sum = sum + objList[j].cookiesByHour[i];
     };
-    total.textContent = (grandTotal);
-    footElement.appendChild(entry);
-    footElement.appendChild(total);
+    grandTotal = grandTotal + sum;
+    entry.textContent = (sum);
+    footElement.appendChild(entry)
   };
+  total.textContent = (grandTotal);
+  footElement.appendChild(entry);
+  footElement.appendChild(total);
+};
 
 var objList = [firstAPObject, seaTacObject, seaCentObject, capHillObject, alkiBeachObject]
 
@@ -142,21 +142,24 @@ function handleStoreSubmit(event) {
   var avg = parseInt(event.target.avg.value, 10);
   var name = event.target.name.value;
   // debugger;
-  if(max <= min || max <= 0 || min <= 0 || avg <=0 || 
-    max > 5000 || min > 5000 || avg > 5000){
-    alert('Max must be greater than min, no negative numbers; I\'m a little teapot. Don\'t fill me up.'); }
+  if (max <= min || max <= 0 || min <= 0 || avg <= 0 ||
+    max > 5000 || min > 5000 || avg > 5000) {
+    alert('Max must be greater than min, no negative numbers; I\'m a little teapot. Don\'t fill me up.');
+  }
   // debugger;
-  else {addNewStore(max,min,avg,name);
-  clearInput()};
+  else {
+    addNewStore(max, min, avg, name);
+    clearInput()
+  };
 
 
   // var newStore = new LocationConstructor(max, min, avg, elementId, name);
-function clearInput(){
-  event.target.max.value = null;
-  event.target.min.value = null;
-  event.target.avg.value = null;
-  event.target.name.value = null;
-}
+  function clearInput() {
+    event.target.max.value = null;
+    event.target.min.value = null;
+    event.target.avg.value = null;
+    event.target.name.value = null;
+  }
 }
 
 newstoreForm.addEventListener('submit', handleStoreSubmit);

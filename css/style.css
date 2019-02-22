@@ -70,3 +70,10 @@ body{
   background-color:rgb(247, 181, 174);
   z-index: -1;
 }
+label{
+  float: right;
+}
+
+#newstore-form{
+  width:150px;
+}

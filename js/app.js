@@ -87,7 +87,6 @@ function tableFootRender(footElement) {
       var sum = 0;
       for(var j =0 ; j < objList.length; j++ ){
         sum = sum + objList[j].cookiesByHour[i];
-
       };
       grandTotal = grandTotal + sum;
       entry.textContent = (sum);
@@ -128,12 +127,6 @@ var newstoreList = document.getElementById('newstore-list');
 var newstoreForm = document.getElementById('newstore-form');
 var allComments = [];
 
-// var Comment = function (max, min, avg, name) {
-//   this.max = max;
-//   this.min = min;
-//   this.avg = avg;
-//   this.name = name;
-// };
 
 Comment.prototype.render = function () {
   var liEl = document.createElement('li');
@@ -151,7 +144,7 @@ function handleStoreSubmit(event) {
   // debugger;
   if(max <= min || max <= 0 || min <= 0 || avg <=0 || 
     max > 5000 || min > 5000 || avg > 5000){
-    alert('Max must be greater than min, no negative numbers.'); }
+    alert('Max must be greater than min, no negative numbers; I\'m a little teapot. Don\'t fill me up.'); }
   // debugger;
   else {addNewStore(max,min,avg,name);
   clearInput()};

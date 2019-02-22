@@ -98,7 +98,6 @@ function tableFootRender(footElement) {
     footElement.appendChild(total);
   };
 
-
 var objList = [firstAPObject, seaTacObject, seaCentObject, capHillObject, alkiBeachObject]
 
 function render() {
@@ -116,15 +115,12 @@ function addNewStore(max, min, avg, name) {
   var newStoreObj = new LocationConstructor(max, min, avg, name);
   objList.push(newStoreObj);
   var element = document.getElementById("rowtotals");
-
   element.parentNode.removeChild(element);
-
   newStoreObj.render();
   var newTotal = document.createElement('tr');
   newTotal.id = 'rowtotals';
   tableMain.appendChild(newTotal);
   tableFootRender(rowtotals);
-
 }
 
 
@@ -132,31 +128,33 @@ var newstoreList = document.getElementById('newstore-list');
 var newstoreForm = document.getElementById('newstore-form');
 var allComments = [];
 
-var Comment = function (max, min, avg, name) {
-  this.max = max;
-  this.min = min;
-  this.avg = avg;
-  this.name = name;
-};
+// var Comment = function (max, min, avg, name) {
+//   this.max = max;
+//   this.min = min;
+//   this.avg = avg;
+//   this.name = name;
+// };
 
 Comment.prototype.render = function () {
   var liEl = document.createElement('li');
   // liEl.innerHtml = '<b>' + this.username + ': </b><em>' + this.text + '</em>';
   liEl.innerHTML = ' <b>' + this.max + ': </b><em>' + this.min + '</em>' + this.avg + name;
   return liEl;
-
 };
 
 function handleStoreSubmit(event) {
   event.preventDefault();
-  var max = event.target.max.value;
-  var min = event.target.min.value;
-  var avg = event.target.avg.value;
+  var max = parseInt(event.target.max.value, 10);
+  var min = parseInt(event.target.min.value, 10);
+  var avg = parseInt(event.target.avg.value, 10);
   var name = event.target.name.value;
-  if(max <= min || max <= 0 || min <= 0 || avg <= 0){
-    alert('Max must be greater than min, no negative numbers.'); clearInput() }
   // debugger;
-  else {addNewStore(max,min,avg,name)};
+  if(max <= min || max <= 0 || min <= 0 || avg <=0 || 
+    max > 5000 || min > 5000 || avg > 5000){
+    alert('Max must be greater than min, no negative numbers.'); }
+  // debugger;
+  else {addNewStore(max,min,avg,name);
+  clearInput()};
 
 
   // var newStore = new LocationConstructor(max, min, avg, elementId, name);

@@ -3,30 +3,28 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Lab 7</title>
+  <title>Lab 8</title>
   <link href="css/style.css" type="text/css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Coiny|ZCOOL+QingKe+HuangYou" rel="stylesheet">
 </head>
 
 <body>
-    <a href="index.html">Back to the homepage</a>
+  <a href="index.html">Back to the homepage</a>
   <h1>Salmon cookie sales by location</h1>
 
   <table id="tablemain">
-    <tr id="tablehead"></tr>
-    <tr id="1andpike"></tr>
-    <tr id="seatac"></tr>
-    <tr id="seacenter"></tr>
-    <tr id="caphill"></tr>
-    <tr id="alkibeach"></tr>
+    <tbody id="tablebody">
+      <tr id="tablehead"></tr>
+    </tbody>
     <tr id="rowtotals"></tr>
+
   </table>
 
 
-  <form id="chat-form">
+  <form id="newstore-form">
     <fieldset>
       <legend>New Store adder</legend>
-      
+
       <label for="max">Max?</label>
       <input name="max" type="text" />
 
@@ -36,16 +34,13 @@
       <label for="avg">Avg?</label>
       <input name="avg" type="text" />
 
-      <label for="elementId">ElementId?</label>
-      <input name="elementId" type="text" />
-
       <label for="name">Name?</label>
       <input name="name" type="text" />
 
-      <button type="submit">Create New Comment!</button>
+      <button type="submit">Create New Store</button>
     </fieldset>
   </form>
-<ul id="chat-list"></ul>
+  <ul id="newstore-list"></ul>
 
   <script src="js/app.js"></script>
 </body>

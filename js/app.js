@@ -18,68 +18,53 @@ var hours = [
   '8:00pm'
 ];
 
-var tableMain = document.getElementById('tablemain');
+var tableMain = document.getElementById('tablebody');
 
-function createRow(rowID){
-  var newRow = document.createElement('tr');
-  newRow.id = rowID;
-  tableMain.appendChild(newRow);
-}
-
-var firstAndPike = document.getElementById('1andpike');
-var seaTac = document.getElementById('seatac');
-var seattleCenter = document.getElementById('seacenter');
-var caphill = document.getElementById('caphill');
-var alki = document.getElementById('alkibeach');
-
-
-var tablehead = document.getElementById('tablehead');
-var tablefoot = document.getElementById('rowtotals');
-
-
-// You need to pass this constructor function the max, min and cookie per sale, also the htmlElement from above ie var locationObject = new LocationConstructor(100,30,3.5,html id));
-function LocationConstructor(max,min,cookiepersale,htmlElementId,rowTitle) {
+// You need to pass this constructor function the max, min and cookie per sale, also the name 
+function LocationConstructor(max, min, cookiepersale, rowTitle) {
   this.maxCustPerHour = max;
   this.minCustPerHour = min;
   this.cookiesPerSale = cookiepersale;
   this.rowTitle = rowTitle;
-  this.randRange = function(){
-    return Math.floor((Math.random() *(this.maxCustPerHour - this.minCustPerHour)) + this.minCustPerHour)};
-  this.cookiesPerHour= this.numCustomerPerHour * this.cookiesPerSale
-  this.cookiesByHour= []
-  this.employeesByHour = [] 
-  this.render= function () {
-    var total = 0;
-    var rowTitleRend = document.createElement('td');
-    rowTitleRend.textContent = this.rowTitle;
-    htmlElementId.appendChild(rowTitleRend);
-    for (var i = 0; i < hours.length; i++) {
-      var liEl = document.createElement('td');
-      var numCustomerPerHour = this.randRange();
-      var cookiesPerHour = Math.floor(numCustomerPerHour * this.cookiesPerSale);
-      liEl.textContent = `${cookiesPerHour} `;
-      htmlElementId.appendChild(liEl);
-      this.cookiesByHour.push(cookiesPerHour);
-      total = cookiesPerHour + total;
-    }
-    var liEltotal = document.createElement('td');
-    liEltotal.textContent = `${total} `;
-    this.cookiesByHour.push(total);
-    htmlElementId.appendChild(liEltotal);
+  this.cookiesByHour = [];
+}
+LocationConstructor.prototype.randRange = function() {
+  return Math.floor((Math.random() * (this.maxCustPerHour - this.minCustPerHour)) + this.minCustPerHour)
+};
+LocationConstructor.prototype.render = function () {
+  var newRow = document.createElement('tr');
+  newRow.textContent = ('');
+  tableMain.appendChild(newRow);
+  var total = 0;
+  var rowTitleRend = document.createElement('td');
+  rowTitleRend.textContent = this.rowTitle;
+  newRow.appendChild(rowTitleRend);
+  for (var i = 0; i < hours.length; i++) {
+    var liEl = document.createElement('td');
+    var numCustomerPerHour = this.randRange();
+    var cookiesPerHour = Math.floor(numCustomerPerHour * this.cookiesPerSale);
+    liEl.textContent = `${cookiesPerHour} `;
+    newRow.appendChild(liEl);
+    this.cookiesByHour.push(cookiesPerHour);
+    total = cookiesPerHour + total;
   }
+  var liEltotal = document.createElement('td');
+  liEltotal.textContent = `${total} `;
+  this.cookiesByHour.push(total);
+  newRow.appendChild(liEltotal);
 };
 
-var firstAPObject = new LocationConstructor(65,23,6.3,firstAndPike,'First and Pike');
-var seaTacObject = new LocationConstructor(24,2,1.2,seatac, 'SeaTac Airport');
-var seaCentObject = new LocationConstructor(38,11,3.7,seacenter,'Seattle Center');
-var capHillObject = new LocationConstructor(38,20,2.3,caphill,'Capitol Hill');
-var alkiBeachObject = new LocationConstructor(16,2,4.6,alkibeach,'Alki');
+var firstAPObject = new LocationConstructor(65, 23, 6.3, 'First and Pike');
+var seaTacObject = new LocationConstructor(24, 2, 1.2, 'SeaTac Airport');
+var seaCentObject = new LocationConstructor(38, 11, 3.7, 'Seattle Center');
+var capHillObject = new LocationConstructor(38, 20, 2.3, 'Capitol Hill');
+var alkiBeachObject = new LocationConstructor(16, 2, 4.6, 'Alki');
 
-function tableHeadRender(headElement){
+function tableHeadRender(headElement) {
   var blank = document.createElement('th');
   blank.innerHTML = ('');
   headElement.appendChild(blank);
-  for (var hourCount = 0; hourCount < hours.length; hourCount++){
+  for (var hourCount = 0; hourCount < hours.length; hourCount++) {
     var tableHeadRow = document.createElement('th');
     tableHeadRow.textContent = hours[hourCount];
     headElement.appendChild(tableHeadRow)
@@ -89,27 +74,37 @@ function tableHeadRender(headElement){
   headElement.appendChild(totals);
 };
 
-function tableFootRender(footElement){
+
+function tableFootRender(footElement) {
+  var total = document.createElement('td');
+  var grandTotal = 0;
   var label = document.createElement('td');
   label.innerHTML = ('By Hour Totals');
   footElement.appendChild(label);
-  for (var i= 0; i < hours.length +1; i++){
+  // debugger;
+  for (var i=0;i<hours.length;i++) {
     var entry = document.createElement('td');
-    entry.textContent = (firstAPObject.cookiesByHour[i] + 
-      seaTacObject.cookiesByHour[i] + 
-      seaCentObject.cookiesByHour[i] + 
-      capHillObject.cookiesByHour[i] +
-      alkiBeachObject.cookiesByHour[i])
+      var sum = 0;
+      for(var j =0 ; j < objList.length; j++ ){
+        sum = sum + objList[j].cookiesByHour[i];
+
+      };
+      grandTotal = grandTotal + sum;
+      entry.textContent = (sum);
       footElement.appendChild(entry)
-  }
-}
+    };
+    total.textContent = (grandTotal);
+    footElement.appendChild(entry);
+    footElement.appendChild(total);
+  };
 
-var objList = [firstAPObject,seaTacObject,seaCentObject,capHillObject,alkiBeachObject]
 
-function render(){
+var objList = [firstAPObject, seaTacObject, seaCentObject, capHillObject, alkiBeachObject]
+
+function render() {
   tableHeadRender(tablehead);
 
-  for (var i =0; i< objList.length; i ++){
+  for (var i = 0; i < objList.length; i++) {
     objList[i].render();
   }
   tableFootRender(rowtotals);
@@ -117,53 +112,60 @@ function render(){
 
 render();
 
-var chatList = document.getElementById('chat-list');
-var chatForm = document.getElementById('chat-form');
+function addNewStore(max, min, avg, name) {
+  var newStoreObj = new LocationConstructor(max, min, avg, name);
+  objList.push(newStoreObj);
+  var element = document.getElementById("rowtotals");
+
+  element.parentNode.removeChild(element);
+
+  newStoreObj.render();
+  var newTotal = document.createElement('tr');
+  newTotal.id = 'rowtotals';
+  tableMain.appendChild(newTotal);
+  tableFootRender(rowtotals);
+
+}
+
+
+var newstoreList = document.getElementById('newstore-list');
+var newstoreForm = document.getElementById('newstore-form');
 var allComments = [];
 
-var Comment = function(max, min, avg, elementId, name) {
+var Comment = function (max, min, avg, name) {
   this.max = max;
   this.min = min;
   this.avg = avg;
-  this.elementId = elementId;
   this.name = name;
 };
 
-Comment.prototype.render = function() {
+Comment.prototype.render = function () {
   var liEl = document.createElement('li');
   // liEl.innerHtml = '<b>' + this.username + ': </b><em>' + this.text + '</em>';
-  liEl.innerHTML = ' <b>' + this.max + ': </b><em>' + this.min + '</em>' + this.avg + elementId + name;
+  liEl.innerHTML = ' <b>' + this.max + ': </b><em>' + this.min + '</em>' + this.avg + name;
   return liEl;
 
 };
 
-function handleCommentSubmit(event) {
+function handleStoreSubmit(event) {
   event.preventDefault();
   var max = event.target.max.value;
   var min = event.target.min.value;
   var avg = event.target.avg.value;
-  var elementId = event.target.elementId.value;
-  var name = event.target.elementId.value;
+  var name = event.target.name.value;
+  if(max <= min || max <= 0 || min <= 0 || avg <= 0){
+    alert('Max must be greater than min, no negative numbers.'); clearInput() }
+  // debugger;
+  else {addNewStore(max,min,avg,name)};
 
 
-  var newStore = new LocationConstructor(max, min, avg, elementId, name);
-
+  // var newStore = new LocationConstructor(max, min, avg, elementId, name);
+function clearInput(){
   event.target.max.value = null;
   event.target.min.value = null;
   event.target.avg.value = null;
-  event.target.elementId.value = null;
   event.target.name.value = null;
-
-  
-  allComments.unshift(newComment);
-  renderAllComments();
+}
 }
 
-// function renderAllComments() {
-//   chatList.innerHTML = '';
-//   for(var i = 0; i < allComments.length; i++) {
-//     chatList.appendChild(allComments[i].render());
-//   }
-// }
-
-chatForm.addEventListener('submit', handleCommentSubmit);
+newstoreForm.addEventListener('submit', handleStoreSubmit);

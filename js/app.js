@@ -17,8 +17,7 @@ var hours = [
   '7:00pm',
   '8:00pm'
 ];
-
-var tableMain = document.getElementById('tablebody');
+var tableMain = document.getElementById('tablemain');
 
 // You need to pass this constructor function the max, min and cookie per sale, also the name 
 function LocationConstructor(max, min, cookiepersale, rowTitle) {
@@ -81,7 +80,6 @@ function tableFootRender(footElement) {
   var label = document.createElement('td');
   label.innerHTML = ('By Hour Totals');
   footElement.appendChild(label);
-  // debugger;
   for (var i = 0; i < hours.length; i++) {
     var entry = document.createElement('td');
     var sum = 0;
@@ -99,26 +97,38 @@ function tableFootRender(footElement) {
 
 var objList = [firstAPObject, seaTacObject, seaCentObject, capHillObject, alkiBeachObject]
 
+function clearTotalsRow(){
+  var element = document.getElementById("rowtotals");
+  element.parentNode.removeChild(element);}
+
+function createTotalsRow(){
+  var newTotal = document.createElement('tr');
+  newTotal.id = 'rowtotals';
+  tableMain.appendChild(newTotal);
+}
+
+
+
 function render() {
-  tableHeadRender(tablehead);
+  tableHeadRender(tablemain);
 
   for (var i = 0; i < objList.length; i++) {
     objList[i].render();
   }
+  clearTotalsRow();
+  createTotalsRow();
   tableFootRender(rowtotals);
 }
 
 render();
 
+
 function addNewStore(max, min, avg, name) {
   var newStoreObj = new LocationConstructor(max, min, avg, name);
   objList.push(newStoreObj);
-  var element = document.getElementById("rowtotals");
-  element.parentNode.removeChild(element);
+  clearTotalsRow();
   newStoreObj.render();
-  var newTotal = document.createElement('tr');
-  newTotal.id = 'rowtotals';
-  tableMain.appendChild(newTotal);
+  createTotalsRow();
   tableFootRender(rowtotals);
 }
 
@@ -138,12 +148,10 @@ function handleStoreSubmit(event) {
   var min = parseInt(event.target.min.value, 10);
   var avg = parseInt(event.target.avg.value, 10);
   var name = event.target.name.value;
-  // debugger;
   if (max <= min || max <= 0 || min <= 0 || avg <= 0 ||
     max > 5000 || min > 5000 || avg > 5000) {
     alert('Max must be greater than min, no negative numbers; I\'m a little teapot. Don\'t fill me up.');
   }
-  // debugger;
   else {
     addNewStore(max, min, avg, name);
     clearInput()

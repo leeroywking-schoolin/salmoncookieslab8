@@ -62,7 +62,7 @@ var alkiBeachObject = new LocationConstructor(16, 2, 4.6, 'Alki');
 
 function tableHeadRender(headElement) {
   var blank = document.createElement('th');
-  blank.innerHTML = ('');
+  blank.innerHTML = ('Locations');
   headElement.appendChild(blank);
   for (var hourCount = 0; hourCount < hours.length; hourCount++) {
     var tableHeadRow = document.createElement('th');

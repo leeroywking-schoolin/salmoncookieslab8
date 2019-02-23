@@ -122,11 +122,8 @@ function addNewStore(max, min, avg, name) {
   tableFootRender(rowtotals);
 }
 
-
 var newstoreList = document.getElementById('newstore-list');
 var newstoreForm = document.getElementById('newstore-form');
-var allComments = [];
-
 
 Comment.prototype.render = function () {
   var liEl = document.createElement('li');
